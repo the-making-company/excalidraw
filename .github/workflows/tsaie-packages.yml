@@ -1,0 +1,27 @@
+name: TSAIE packages
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  packages: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://npm.pkg.github.com
+          scope: "@the-making-company"
+      - run: yarn install --frozen-lockfile
+      - run: yarn test:app --run packages/excalidraw/components/tsaie packages/excalidraw/components/dropdownMenu/DropdownMenu.test.tsx packages/excalidraw/tests/history.test.tsx packages/excalidraw/tests/export.test.tsx packages/excalidraw/tests/clipboard.test.tsx
+      - run: yarn build:packages
+      - run: node scripts/stage-tsaie-packages.cjs
+      - run: node scripts/verify-tsaie-packages.cjs
+      - run: |
+          for package in common fractional-indexing laser-pointer math element excalidraw; do
+            npm publish "./dist/tsaie-packages/$package" --tag tsaie
+          done
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

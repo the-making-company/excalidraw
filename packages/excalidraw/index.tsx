@@ -159,10 +159,16 @@ const ExcalidrawBase = (props: ExcalidrawProps) => {
   const onExcalidrawAPIRef = useRef(onExcalidrawAPI);
   onExcalidrawAPIRef.current = onExcalidrawAPI;
 
+  const legacyAPIRef = useRef(props.excalidrawAPI);
+  legacyAPIRef.current = props.excalidrawAPI;
+
   const handleExcalidrawAPI = useCallback(
     (api: ExcalidrawImperativeAPI | null) => {
       setExcalidrawAPI?.(api);
       onExcalidrawAPIRef.current?.(api);
+      if (api && legacyAPIRef.current !== onExcalidrawAPIRef.current) {
+        legacyAPIRef.current?.(api);
+      }
     },
     [setExcalidrawAPI],
   );
@@ -423,7 +429,13 @@ export {
 
 export { reconcileElements } from "./data/reconcile";
 
-export { exportScene, exportToClipboard } from "./scene/export";
+export { exportScene } from "./scene/export";
+export {
+  exportToCanvas,
+  exportToBlob,
+  exportToSvg,
+  exportToClipboard,
+} from "./tsaie-export";
 
 export type {
   ExportSceneData,
