@@ -1,5 +1,7 @@
 import React from "react";
 
+import { API } from "../../tests/helpers/api";
+
 import { Excalidraw, restoreElements, serializeAsJSON } from "../../index";
 import { render, waitFor } from "../../tests/test-utils";
 
@@ -8,12 +10,14 @@ it("keeps the legacy API callback used by TSAIE and preserves custom data", asyn
   const elements = restoreElements(
     [
       {
-        id: "synthetic-card",
-        type: "rectangle",
-        x: 10,
-        y: 10,
-        width: 100,
-        height: 60,
+        ...API.createElement({
+          id: "synthetic-card",
+          type: "rectangle",
+          x: 10,
+          y: 10,
+          width: 100,
+          height: 60,
+        }),
         customData: { kind: "tsaie.synthetic", title: "Synthetic card" },
       },
     ],

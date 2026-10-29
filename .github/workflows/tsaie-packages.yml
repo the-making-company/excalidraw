@@ -16,6 +16,7 @@ jobs:
           scope: "@the-making-company"
       - run: yarn install --frozen-lockfile
       - run: yarn test:app --run packages/excalidraw/components/tsaie packages/excalidraw/components/dropdownMenu/DropdownMenu.test.tsx packages/excalidraw/tests/history.test.tsx packages/excalidraw/tests/export.test.tsx packages/excalidraw/tests/clipboard.test.tsx
+      - run: yarn test:typecheck
       - run: yarn build:packages
       - run: node scripts/stage-tsaie-packages.cjs
       - run: node scripts/verify-tsaie-packages.cjs

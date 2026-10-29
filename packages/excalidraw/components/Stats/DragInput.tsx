@@ -15,6 +15,8 @@ import type {
 
 import type { Scene } from "@excalidraw/element";
 
+import { ControlInput } from "../tsaie/controls";
+
 import { useApp, useExcalidrawSetAppState } from "../App";
 import { InlineIcon } from "../InlineIcon";
 
@@ -364,7 +366,7 @@ const StatsDragInput = <
       >
         {icon ? <InlineIcon icon={icon} /> : label}
       </div>
-      <input
+      <ControlInput
         className="drag-input"
         autoComplete="off"
         spellCheck="false"

@@ -1,10 +1,9 @@
-import { restoreElements } from "../../data/restore";
+import { API } from "../../tests/helpers/api";
 import { exportToCanvas, exportToSvg, exportToBlob } from "../../tsaie-export";
 
-const elements = restoreElements(
-  [{ type: "rectangle", x: 0, y: 0, width: 100, height: 60 }],
-  null,
-);
+const elements = [
+  API.createElement({ type: "rectangle", x: 0, y: 0, width: 100, height: 60 }),
+];
 it("preserves legacy sizing callbacks and padding for TSAIE PNG exports", async () => {
   const getDimensions = vi.fn((width: number, height: number) => ({
     width: width * 2,

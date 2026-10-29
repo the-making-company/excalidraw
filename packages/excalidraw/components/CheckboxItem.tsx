@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import React from "react";
 
-import { checkIcon } from "./icons";
+import { ControlButton } from "./tsaie/controls";
 
-import "./CheckboxItem.scss";
+import { checkIcon } from "./icons";
 
 export const CheckboxItem: React.FC<{
   checked: boolean;
@@ -23,14 +23,14 @@ export const CheckboxItem: React.FC<{
         ).focus();
       }}
     >
-      <button
+      <ControlButton
         type="button"
         className="Checkbox-box"
         role="checkbox"
         aria-checked={checked}
       >
         {checkIcon}
-      </button>
+      </ControlButton>
       <div className="Checkbox-label">{children}</div>
     </div>
   );

@@ -7,6 +7,8 @@ import {
   useState,
 } from "react";
 
+import { ControlInput } from "./tsaie/controls";
+
 import { Button } from "./Button";
 import { eyeIcon, eyeClosedIcon } from "./icons";
 
@@ -81,7 +83,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             "ExcTextField__input--readonly": readonly,
           })}
         >
-          <input
+          <ControlInput
             className={clsx({
               "is-redacted":
                 "value" in rest &&

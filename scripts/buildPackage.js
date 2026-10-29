@@ -64,6 +64,21 @@ const getConfig = (outdir) => ({
   format: "esm",
   packages: "external",
   plugins: [
+    {
+      name: "tsaie-tailwind",
+      setup(builder) {
+        builder.onLoad({ filter: /\/tsaie\.css$/ }, async ({ path: file }) => {
+          const result = await require("postcss")([
+            require("@tailwindcss/postcss")(),
+          ]).process(fs.readFileSync(file, "utf8"), { from: file });
+          return {
+            contents: result.css,
+            loader: "css",
+            resolveDir: path.dirname(file),
+          };
+        });
+      },
+    },
     sassPlugin({
       precompile,
     }),

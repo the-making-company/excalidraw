@@ -5,6 +5,8 @@ import { isPromiseLike } from "@excalidraw/common";
 
 import { AbortError } from "../errors";
 
+import { ControlButton } from "./tsaie/controls";
+
 import Spinner from "./Spinner";
 import { tablerCheckIcon } from "./icons";
 
@@ -82,7 +84,7 @@ export const FilledButton = forwardRef<HTMLButtonElement, FilledButtonProps>(
     color = _status === "success" ? "success" : color;
 
     return (
-      <button
+      <ControlButton
         className={clsx(
           "ExcButton",
           `ExcButton--color-${color}`,
@@ -113,7 +115,7 @@ export const FilledButton = forwardRef<HTMLButtonElement, FilledButtonProps>(
           )}
           {variant !== "icon" && (children ?? label)}
         </div>
-      </button>
+      </ControlButton>
     );
   },
 );

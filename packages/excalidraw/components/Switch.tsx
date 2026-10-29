@@ -1,5 +1,7 @@
 import clsx from "clsx";
 
+import { ControlInput } from "./tsaie/controls";
+
 import "./Switch.scss";
 
 export type SwitchProps = {
@@ -19,7 +21,7 @@ export const Switch = ({
 }: SwitchProps) => {
   return (
     <div className={clsx("Switch", { toggled: checked, disabled })}>
-      <input
+      <ControlInput
         name={name}
         id={name}
         title={title}
@@ -27,11 +29,6 @@ export const Switch = ({
         checked={checked}
         disabled={disabled}
         onChange={() => onChange(!checked)}
-        onKeyDown={(event) => {
-          if (event.key === " ") {
-            onChange(!checked);
-          }
-        }}
       />
     </div>
   );
