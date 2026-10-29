@@ -1,8 +1,6 @@
 name: "Bundle Size check @excalidraw/excalidraw"
 on:
-  pull_request:
-    branches:
-      - master
+  workflow_dispatch:
 jobs:
   size:
     runs-on: ubuntu-latest
