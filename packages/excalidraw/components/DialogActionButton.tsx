@@ -1,5 +1,7 @@
 import clsx from "clsx";
 
+import { ControlButton } from "./tsaie/controls";
+
 import Spinner from "./Spinner";
 
 import "./DialogActionButton.scss";
@@ -26,7 +28,7 @@ const DialogActionButton = ({
   const cs = actionType ? `Dialog__action-button--${actionType}` : "";
 
   return (
-    <button
+    <ControlButton
       className={clsx("Dialog__action-button", cs, className)}
       type={type}
       aria-label={label}
@@ -42,7 +44,7 @@ const DialogActionButton = ({
           <Spinner />
         </div>
       )}
-    </button>
+    </ControlButton>
   );
 };
 

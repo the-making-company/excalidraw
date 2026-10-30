@@ -7,6 +7,8 @@ import type { PointerType } from "@excalidraw/element/types";
 
 import { AbortError } from "../errors";
 
+import { ControlButton } from "./tsaie/controls";
+
 import "./ToolIcon.scss";
 
 import Spinner from "./Spinner";
@@ -110,7 +112,7 @@ export const IconButton = React.forwardRef(
 
     if (props.type === "button" || props.type === "icon") {
       return (
-        <button
+        <ControlButton
           className={clsx(
             "ToolIcon_type_button",
             sizeCn,
@@ -154,12 +156,12 @@ export const IconButton = React.forwardRef(
             </div>
           )}
           {props.children}
-        </button>
+        </ControlButton>
       );
     }
 
     return (
-      <button
+      <ControlButton
         className={clsx("ToolIcon", "ToolIcon_type_toggle", sizeCn, className, {
           "ToolIcon--checked": props.checked,
         })}
@@ -194,7 +196,7 @@ export const IconButton = React.forwardRef(
             </span>
           )}
         </div>
-      </button>
+      </ControlButton>
     );
   },
 );

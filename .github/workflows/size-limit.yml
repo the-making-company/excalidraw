@@ -1,11 +1,12 @@
 name: "Bundle Size check @excalidraw/excalidraw"
 on:
-  pull_request:
-    branches:
-      - master
+  workflow_dispatch:
 jobs:
   size:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     env:
       CI_JOB_NUMBER: 1
     steps:

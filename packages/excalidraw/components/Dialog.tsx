@@ -7,6 +7,8 @@ import { useSetAtom } from "../editor-jotai";
 import { useCallbackRefState } from "../hooks/useCallbackRefState";
 import { t } from "../i18n";
 
+import { ControlButton } from "./tsaie/controls";
+
 import {
   useExcalidrawContainer,
   useEditorInterface,
@@ -49,8 +51,8 @@ function getDialogSize(size: DialogSize): number {
 
 export const Dialog = (props: DialogProps) => {
   const [islandNode, setIslandNode] = useCallbackRefState<HTMLDivElement>();
-  const [lastActiveElement] = useState(document.activeElement);
-  const { id } = useExcalidrawContainer();
+  const { id, container } = useExcalidrawContainer();
+  const [lastActiveElement] = useState(container?.ownerDocument.activeElement);
   const isFullscreen = useEditorInterface().formFactor === "phone";
 
   useEffect(() => {
@@ -60,7 +62,8 @@ export const Dialog = (props: DialogProps) => {
 
     const focusableElements = queryFocusableElements(islandNode);
 
-    setTimeout(() => {
+    const ownerWindow = islandNode.ownerDocument.defaultView;
+    const timer = ownerWindow?.setTimeout(() => {
       if (focusableElements.length > 0 && props.autofocus !== false) {
         // If there's an element other than close, focus it.
         (focusableElements[1] || focusableElements[0]).focus();
@@ -70,7 +73,7 @@ export const Dialog = (props: DialogProps) => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === KEYS.TAB) {
         const focusableElements = queryFocusableElements(islandNode);
-        const { activeElement } = document;
+        const { activeElement } = islandNode.ownerDocument;
         const currentIndex = focusableElements.findIndex(
           (element) => element === activeElement,
         );
@@ -90,7 +93,10 @@ export const Dialog = (props: DialogProps) => {
 
     islandNode.addEventListener("keydown", handleKeyDown);
 
-    return () => islandNode.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      ownerWindow?.clearTimeout(timer);
+      islandNode.removeEventListener("keydown", handleKeyDown);
+    };
   }, [islandNode, props.autofocus]);
 
   const setAppState = useExcalidrawSetAppState();
@@ -99,7 +105,7 @@ export const Dialog = (props: DialogProps) => {
   const onClose = () => {
     setAppState({ openMenu: null });
     setIsLibraryMenuOpen(false);
-    (lastActiveElement as HTMLElement).focus();
+    (lastActiveElement as HTMLElement | null)?.focus();
     props.onCloseRequest();
   };
 
@@ -108,7 +114,7 @@ export const Dialog = (props: DialogProps) => {
       className={clsx("Dialog", props.className, {
         "Dialog--fullscreen": isFullscreen,
       })}
-      labelledBy="dialog-title"
+      labelledBy={`${id}-dialog-title`}
       maxWidth={getDialogSize(props.size)}
       onCloseRequest={onClose}
       closeOnClickOutside={props.closeOnClickOutside}
@@ -120,7 +126,7 @@ export const Dialog = (props: DialogProps) => {
           </h2>
         )}
         {isFullscreen && (
-          <button
+          <ControlButton
             className="Dialog__close"
             onClick={onClose}
             title={t("buttons.close")}
@@ -128,7 +134,7 @@ export const Dialog = (props: DialogProps) => {
             type="button"
           >
             {CloseIcon}
-          </button>
+          </ControlButton>
         )}
         <div className="Dialog__content">{props.children}</div>
       </Island>

@@ -3,7 +3,7 @@ import React from "react";
 
 import { composeEventHandlers } from "@excalidraw/common";
 
-import "./Button.scss";
+import { ControlButton } from "./tsaie/controls";
 
 interface ButtonProps
   extends React.DetailedHTMLProps<
@@ -32,7 +32,7 @@ export const Button = ({
   ...rest
 }: ButtonProps) => {
   return (
-    <button
+    <ControlButton
       onClick={composeEventHandlers(rest.onClick, (event) => {
         onSelect();
       })}
@@ -41,6 +41,6 @@ export const Button = ({
       {...rest}
     >
       {children}
-    </button>
+    </ControlButton>
   );
 };

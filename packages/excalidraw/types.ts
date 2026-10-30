@@ -895,6 +895,8 @@ export interface ExcalidrawProps {
    * NOTE editor is not yet mounted, and state is not yet initialized
    */
   onExcalidrawAPI?: (api: ExcalidrawImperativeAPI | null) => void;
+  /** Compatibility with the 0.18.x embedded editor API. */
+  excalidrawAPI?: (api: ExcalidrawImperativeAPI) => void;
   /**
    * Invoked once the editor root is mounted.
    */

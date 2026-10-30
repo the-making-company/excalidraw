@@ -95,6 +95,11 @@ mockMermaidToExcalidraw({
 
 const normalizeDialogSnapshot = (dialog: Element) => {
   const dialogClone = dialog.cloneNode(true) as HTMLElement;
+  // The editor instance prefix is random; retain the title relationship in the snapshot.
+  const labelledBy = dialogClone.getAttribute("aria-labelledby");
+  if (labelledBy?.endsWith("-dialog-title")) {
+    dialogClone.setAttribute("aria-labelledby", "editor-dialog-title");
+  }
 
   dialogClone
     .querySelectorAll<HTMLElement>(".ttd-dialog-content")

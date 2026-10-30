@@ -1,0 +1,162 @@
+/* No preflight: this stylesheet must never reset the embedding application. */
+@import "tailwindcss/theme.css" prefix(exc);
+@import "tailwindcss/utilities.css" prefix(exc) source(none);
+
+.excalidraw,
+.excalidraw-tooltip {
+  --tsaie-bg: var(--color-fd-background, #fff);
+  --tsaie-card: var(--color-fd-card, #fafafa);
+  --tsaie-fg: var(--color-fd-foreground, #171717);
+  --tsaie-muted: var(--color-fd-muted-foreground, #737373);
+  --tsaie-border: var(--color-fd-border, #e5e5e5);
+  --tsaie-accent: var(--color-fd-accent, #f0f0f0);
+  --tsaie-primary: var(--color-fd-primary, #171717);
+  --tsaie-primary-fg: var(--color-fd-primary-foreground, #fafafa);
+  --tsaie-ring: var(--color-fd-ring, #737373);
+  --tsaie-font: var(--font-sans, system-ui, sans-serif);
+}
+.excalidraw.theme--dark,
+.excalidraw-tooltip.theme--dark {
+  --tsaie-bg: var(--color-fd-background, #111);
+  --tsaie-card: var(--color-fd-card, #191919);
+  --tsaie-fg: var(--color-fd-foreground, #eee);
+  --tsaie-muted: var(--color-fd-muted-foreground, #a3a3a3);
+  --tsaie-border: var(--color-fd-border, #303030);
+  --tsaie-accent: var(--color-fd-accent, #292929);
+  --tsaie-primary: var(--color-fd-primary, #fafafa);
+  --tsaie-primary-fg: var(--color-fd-primary-foreground, #171717);
+}
+.excalidraw {
+  --island-bg-color: var(--tsaie-card);
+  --popup-bg-color: var(--tsaie-card);
+  --popup-text-color: var(--tsaie-fg);
+  --dialog-border-color: var(--tsaie-border);
+  --sidebar-bg-color: var(--tsaie-card);
+  --sidebar-border-color: var(--tsaie-border);
+  font-family: var(--tsaie-font);
+}
+.excalidraw .tsaie-control {
+  @apply exc:inline-flex exc:items-center exc:justify-center exc:gap-2 exc:rounded-lg exc:text-sm exc:font-medium exc:transition-colors;
+  box-sizing: border-box;
+  min-height: 2rem;
+  border: 1px solid var(--tsaie-border);
+  background: var(--tsaie-bg);
+  color: var(--tsaie-fg);
+  font-family: var(--tsaie-font);
+  cursor: pointer;
+}
+.excalidraw .tsaie-control:hover:not(:disabled) {
+  background: var(--tsaie-accent);
+}
+.excalidraw .tsaie-control:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.excalidraw .tsaie-control:focus-visible,
+.excalidraw .tsaie-input:focus-visible,
+.excalidraw .dropdown-menu-item:focus-visible {
+  outline: 2px solid var(--tsaie-ring);
+  outline-offset: 2px;
+}
+.excalidraw .tsaie-control[aria-pressed="true"],
+.excalidraw .tsaie-control.selected,
+.excalidraw .tsaie-control.ExcButton--variant-filled,
+.excalidraw .tsaie-control.Dialog__action-button--primary {
+  background: var(--tsaie-primary);
+  color: var(--tsaie-primary-fg);
+}
+.excalidraw .tsaie-control.ExcButton--color-danger,
+.excalidraw .tsaie-control.Dialog__action-button--danger {
+  color: #dc2626;
+}
+.excalidraw .excalidraw-button {
+  padding: 0.5rem 0.75rem;
+}
+.excalidraw .tsaie-input {
+  @apply exc:rounded-md exc:text-sm;
+  font-family: var(--tsaie-font);
+  color: var(--tsaie-fg);
+  background: var(--tsaie-bg);
+  border-color: var(--tsaie-border);
+}
+.excalidraw .ExcTextField__input {
+  background: var(--tsaie-bg);
+  border-color: var(--tsaie-border);
+  height: 2.5rem;
+}
+.excalidraw .ExcTextField__label {
+  font-family: var(--tsaie-font);
+  color: var(--tsaie-fg);
+}
+.excalidraw .ExcTextField__input .tsaie-input {
+  font-family: var(--tsaie-font);
+  color: var(--tsaie-fg);
+}
+.excalidraw .Island {
+  @apply exc:rounded-xl;
+  border: 1px solid var(--tsaie-border);
+  background: var(--tsaie-card);
+  color: var(--tsaie-fg);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.08);
+}
+.excalidraw .dropdown-menu-container {
+  padding: 0.5rem;
+}
+.excalidraw .dropdown-menu-item {
+  @apply exc:rounded-lg exc:text-sm;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  font-family: var(--tsaie-font);
+  color: var(--tsaie-fg);
+}
+.excalidraw .dropdown-menu-item:hover,
+.excalidraw .dropdown-menu-item[data-highlighted] {
+  background: var(--tsaie-accent);
+}
+.excalidraw .Dialog__title {
+  font-family: var(--tsaie-font);
+  font-weight: 600;
+}
+.excalidraw .Checkbox {
+  @apply exc:flex exc:items-center exc:gap-3 exc:my-2;
+  cursor: pointer;
+}
+.excalidraw .Checkbox-box {
+  min-height: 1.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  border-radius: 0.25rem;
+}
+.excalidraw .Checkbox-box svg {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0;
+}
+.excalidraw .Checkbox-box[aria-checked="true"] {
+  background: var(--tsaie-primary);
+  color: var(--tsaie-primary-fg);
+}
+.excalidraw .Checkbox-box[aria-checked="true"] svg {
+  opacity: 1;
+}
+.excalidraw-tooltip {
+  @apply exc:rounded-md exc:text-xs;
+  background: var(--tsaie-primary);
+  color: var(--tsaie-primary-fg);
+  font-family: var(--tsaie-font);
+  padding: 0.375rem 0.5rem;
+  border: 1px solid var(--tsaie-border);
+}
+
+.excalidraw .Switch.toggled,
+.excalidraw .Switch.toggled:hover {
+  background: var(--tsaie-primary);
+  border-color: var(--tsaie-primary);
+}
+.excalidraw .Switch.toggled::before {
+  background: var(--tsaie-primary-fg);
+}
+.excalidraw .Switch .tsaie-input {
+  background: transparent;
+}

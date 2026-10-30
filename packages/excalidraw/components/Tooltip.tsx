@@ -135,6 +135,7 @@ const updateTooltip = (
     shownTooltip.classList.remove(TOOLTIP_VISIBLE_CLASS);
   }
   shownTooltip = tooltip;
+  tooltip.classList.toggle("theme--dark", !!item.closest(".theme--dark"));
   tooltip.classList.add(TOOLTIP_VISIBLE_CLASS);
   tooltip.style.minWidth = long ? "50ch" : "10ch";
   tooltip.style.maxWidth = long ? "50ch" : "15ch";
@@ -233,6 +234,8 @@ export const Tooltip = ({
         showTooltip(event.currentTarget, label, { long, delay })
       }
       onPointerLeave={hideTooltip}
+      onFocus={(event) => showTooltip(event.currentTarget, label, { long })}
+      onBlur={hideTooltip}
       style={style}
     >
       {children}
